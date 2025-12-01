@@ -1,27 +1,12 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Progressive streaming</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-  <div class="player">
-    <h2>Highest Quality</h2>
-
-    <video id="video" controls preload="metadata" playsinline>
-      <source src="video.mp4" type="video/mp4">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Progressive Streaming Assignment</title>
+  <head>
+  <body>
+    <h2> Minimal progressive streaming example</h2>
+    <video controls autoplay style="width:100%">
+      <source src="progressive.mp4" type="video/mp4">
     </video>
-
-    <h3>Log Function</h3>
-    <button id="startLog">Start Logging</button>
-    <button id="downloadLog">Download Log</button>
-
-    <pre id="log"></pre>
-  </div>
-
-  <script src="instrument.js"></script>
-</body>
+  </body>
 </html>
