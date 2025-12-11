@@ -32,9 +32,8 @@
 
     <script>
         // Set the URI for the MPEG-DASH manifest file (.mpd)
-        // **IMPORTANT**: Replace this with the URL or relative path to YOUR .mpd file!
-        const manifestUri = 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd'; 
-        
+        const manifestUri = 'https://github.com/AstolfoTheDev/Metaverse_Website/manifest_avc.mpd'; 
+
         // This function is run once the UI and Player are loaded and ready.
         async function init() {
             // Install polyfills (necessary for MediaSource Extensions support on some older browsers)
@@ -52,7 +51,6 @@
             // Attach player to the window for debugging purposes
             window.player = player;
 
-            // Optional: Listen for error events
             player.addEventListener('error', onPlayerErrorEvent);
             controls.addEventListener('error', onUIErrorEvent);
 
