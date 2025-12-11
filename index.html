@@ -1,12 +1,88 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Progressive Streaming Assignment</title>
-  <head>
-  <body>
-    <h2> Minimal progressive streaming example</h2>
-    <video controls autoplay style="width:100%">
-      <source src="progressive.mp4" type="video/mp4">
-    </video>
-  </body>
+<head>
+    <meta charset="utf-8">
+    <title>Shaka Player Adaptive Streaming Demo</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/controls.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.compiled.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.ui.js"></script>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #1a1a1a;
+        }
+        #video-container {
+            width: 80%; /* Adjust as needed */
+            max-width: 900px;
+        }
+    </style>
+</head>
+<body>
+    <div id="video-container">
+        <div data-shaka-player-container style="width:100%;">
+            <video autoplay controls data-shaka-player id="video" style="width:100%;"></video>
+        </div>
+    </div>
+
+    <script>
+        // Set the URI for the MPEG-DASH manifest file (.mpd)
+        // **IMPORTANT**: Replace this with the URL or relative path to YOUR .mpd file!
+        const manifestUri = 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd'; 
+        
+        // This function is run once the UI and Player are loaded and ready.
+        async function init() {
+            // Install polyfills (necessary for MediaSource Extensions support on some older browsers)
+            shaka.polyfill.installAll();
+
+            // Check if the browser supports the necessary media APIs (MediaSource Extensions)
+            if (shaka.Player.is -> )
+            
+            // Get the video element and the player controls object created by the UI
+            const video = document.getElementById('video');
+            const ui = video['ui'];
+            const controls = ui.getControls();
+            const player = controls.getPlayer();
+
+            // Attach player to the window for debugging purposes
+            window.player = player;
+
+            // Optional: Listen for error events
+            player.addEventListener('error', onPlayerErrorEvent);
+            controls.addEventListener('error', onUIErrorEvent);
+
+            // Try to load the manifest.
+            try {
+                await player.load(manifestUri);
+                console.log('The video has now been loaded!');
+            } catch (error) {
+                // An error occurred during the asynchronous load.
+                onPlayerError(error);
+            }
+        }
+
+        function onPlayerErrorEvent(errorEvent) {
+            // Extract the shaka.util.Error object from the event.
+            onPlayerError(event.detail);
+        }
+
+        function onPlayerError(error) {
+            // Handle player error
+            console.error('Error code', error.code, 'object', error);
+        }
+        
+        function onUIErrorEvent(errorEvent) {
+            // Extract the shaka.util.Error object from the event.
+            onPlayerError(event.detail);
+        }
+
+        // Listen for the custom shaka-ui-loaded event, which means the player UI is ready to be initialized.
+        document.addEventListener('shaka-ui-loaded', init);
+    </script>
+</body>
 </html>
